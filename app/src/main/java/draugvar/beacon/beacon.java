@@ -18,7 +18,7 @@ public class beacon extends Application implements BootstrapNotifier {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(TAG, "App started up");
+        Log.d(TAG, "INIZIO");
         beaconManager = BeaconManager.getInstanceForApplication(this);
         // To detect proprietary beacons, you must add a line like below corresponding to your beacon
         // type.  Do a web search for "setBeaconLayout" to get the proper expression.
