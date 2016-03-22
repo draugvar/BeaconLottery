@@ -30,4 +30,5 @@ dependencies {
     }
     compile 'com.mikepenz:fastadapter-extensions:1.2.5@aar'
     compile 'de.hdodenhof:circleimageview:1.2.2'
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }

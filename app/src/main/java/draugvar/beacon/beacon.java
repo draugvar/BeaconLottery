@@ -43,8 +43,6 @@ public class beacon extends Application implements BootstrapNotifier {
         //regionBootstrap.disable();
 
         Intent intent = new Intent(this, RangingActivity.class);
-        beaconManager.setBackgroundScanPeriod(5000l);
-        beaconManager.setForegroundScanPeriod(5000l);
         // IMPORTANT: in the AndroidManifest.xml definition of this activity, you must set
         // android:launchMode="singleInstance" or you will get two instances
         // created when a user launches the activity manually and it gets launched from here.
