@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "draugvar.beacon"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -29,4 +29,5 @@ dependencies {
         transitive = true
     }
     compile 'com.mikepenz:fastadapter-extensions:1.2.5@aar'
+    compile 'de.hdodenhof:circleimageview:1.2.2'
 }
