@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
 
+import com.mikepenz.fastadapter.adapters.FastItemAdapter;
+
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
 import org.altbeacon.beacon.BeaconManager;
@@ -27,6 +29,16 @@ public class RangingActivity extends Activity implements BeaconConsumer {
         // beaconManager.getBeaconParsers().add(new BeaconParser().
         //        setBeaconLayout("m:2-3=beac,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"));
         beaconManager.bind(this);
+
+        //create our FastAdapter which will manage everything
+        FastItemAdapter fastAdapter = new FastItemAdapter();
+
+        //set our adapters to the RecyclerView
+        //we wrap our FastAdapter inside the ItemAdapter -> This allows us to chain adapters for more complex useCases
+        recyclerView.setAdapter(fastAdapter);
+
+        //set the items to your ItemAdapter
+        fastAdapter.add(ITEMS);
     }
     @Override
     protected void onDestroy() {

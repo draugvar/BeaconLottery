@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Intent;
 import android.util.Log;
 
-import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconManager;
 import org.altbeacon.beacon.BeaconParser;
 import org.altbeacon.beacon.Region;
@@ -18,7 +17,7 @@ public class beacon extends Application implements BootstrapNotifier {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(TAG, "INIZIO");
+        Log.d(TAG, "App Started Up!");
         beaconManager = BeaconManager.getInstanceForApplication(this);
         // To detect proprietary beacons, you must add a line like below corresponding to your beacon
         // type.  Do a web search for "setBeaconLayout" to get the proper expression.
