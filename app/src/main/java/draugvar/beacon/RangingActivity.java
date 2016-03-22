@@ -15,12 +15,13 @@ import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
 import java.util.Collection;
+import java.util.List;
 
 public class RangingActivity extends Activity implements BeaconConsumer {
     protected static final String TAG = "RangingActivity";
     private BeaconManager beaconManager;
     private RecyclerView recyclerView;
-
+    private FastItemAdapter fastAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,16 +33,15 @@ public class RangingActivity extends Activity implements BeaconConsumer {
         // beaconManager.getBeaconParsers().add(new BeaconParser().
         //        setBeaconLayout("m:2-3=beac,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"));
         beaconManager.bind(this);
+
         recyclerView=(RecyclerView)findViewById(R.id.beacon_recycler_view);
         //create our FastAdapter which will manage everything
-        FastItemAdapter fastAdapter = new FastItemAdapter();
+        fastAdapter = new FastItemAdapter();
 
         //set our adapters to the RecyclerView
         //we wrap our FastAdapter inside the ItemAdapter -> This allows us to chain adapters for more complex useCases
         recyclerView.setAdapter(fastAdapter);
 
-        //set the items to your ItemAdapter
-        fastAdapter.add(ITEMS);
     }
     @Override
     protected void onDestroy() {
@@ -53,8 +53,13 @@ public class RangingActivity extends Activity implements BeaconConsumer {
         beaconManager.setRangeNotifier(new RangeNotifier() {
             @Override
             public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
+                //set the items to your ItemAdapter
+                //fastAdapter.add((List<Beacon>)beacons);
                 if (beacons.size() > 0) {
-                    Log.i(TAG, "The first beacon I see is " + beacons.iterator().next().getId1());
+                    BeaconItem b=new BeaconItem();
+                    b.name=beacons.iterator().next().getId1().toString();
+                    fastAdapter.add(b);
+                    Log.i(TAG, "The first beacon I see is " + b.name);
                 }
             }
         });

@@ -6,9 +6,12 @@ import android.widget.TextView;
 
 import com.mikepenz.fastadapter.items.AbstractItem;
 
+import org.altbeacon.beacon.Beacon;
+
 public class BeaconItem extends AbstractItem<BeaconItem, BeaconItem.ViewHolder> {
     public String name;
     public String description;
+
 
     //The unique ID for this type of item
     @Override
@@ -42,8 +45,8 @@ public class BeaconItem extends AbstractItem<BeaconItem, BeaconItem.ViewHolder> 
 
         public ViewHolder(View view) {
             super(view);
-            this.name = (TextView) view.findViewById(com.mikepenz.materialdrawer.R.id.material_drawer_name);
-            this.description = (TextView) view.findViewById(com.mikepenz.materialdrawer.R.id.material_drawer_description);
+            this.name = (TextView) view.findViewById(R.id.id1);
+            this.description = (TextView) view.findViewById(R.id.potenza);
         }
     }
 }
