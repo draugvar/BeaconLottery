@@ -8,7 +8,7 @@ import com.mikepenz.fastadapter.items.AbstractItem;
 
 public class BeaconItem extends AbstractItem<BeaconItem, BeaconItem.ViewHolder> {
     public String name;
-    public String description;
+    public String distance;
 
 
     //The unique ID for this type of item
@@ -32,19 +32,19 @@ public class BeaconItem extends AbstractItem<BeaconItem, BeaconItem.ViewHolder> 
         //bind our data
         //set the text for the name
         viewHolder.name.setText(name);
-        //set the text for the description or hide
-        viewHolder.description.setText(description);
+        //set the text for the distance or hide
+        viewHolder.distance.setText(distance);
     }
 
     //The viewHolder used for this item. This viewHolder is always reused by the RecyclerView so scrolling is blazing fast
     protected static class ViewHolder extends RecyclerView.ViewHolder {
         protected TextView name;
-        protected TextView description;
+        protected TextView distance;
 
         public ViewHolder(View view) {
             super(view);
             this.name = (TextView) view.findViewById(R.id.id1);
-            this.description = (TextView) view.findViewById(R.id.potenza);
+            this.distance = (TextView) view.findViewById(R.id.distance);
         }
     }
 }

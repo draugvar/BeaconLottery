@@ -16,7 +16,10 @@ import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 
 import org.altbeacon.beacon.BeaconConsumer;
 import org.altbeacon.beacon.BeaconManager;
+import org.altbeacon.beacon.BeaconParser;
 import org.altbeacon.beacon.Region;
+
+import java.util.regex.Pattern;
 
 public class RangingActivity extends AppCompatActivity implements BeaconConsumer {
     protected static final String TAG = "RangingActivity";
@@ -36,10 +39,14 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
         // type.  Do a web search for "setBeaconLayout" to get the proper expression.
         // beaconManager.getBeaconParsers().add(new BeaconParser().
         //        setBeaconLayout("m:2-3=beac,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"));
+        //estimote layout
+        beaconManager.getBeaconParsers().
+                add(new BeaconParser().
+                        setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"));
         beaconManager.bind(this);
 
-        beaconManager.setBackgroundScanPeriod(1000l);
-        beaconManager.setForegroundScanPeriod(1000l);
+        beaconManager.setBackgroundScanPeriod(6000l);
+        beaconManager.setForegroundScanPeriod(6000l);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.beacon_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -101,10 +108,11 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
             switch (msg.what) {
                 case BeaconRangeNotifier.MESSAGE_READ:
                     String mMessage = (String) msg.obj;
-                    String[] s = mMessage.split("||");
+                    String[] s = mMessage.split(Pattern.quote("||"));
                     BeaconItem beaconItem = new BeaconItem();
-                    beaconItem.name = mMessage;
-                    beaconItem.description = s[1];
+                    beaconItem.name = s[0];
+                    beaconItem.distance = s[1];
+                    Log.d(TAG, "Name "+beaconItem.name+" distance "+beaconItem.distance);
                     fastAdapter.clear();
                     fastAdapter.add(beaconItem);
             }
