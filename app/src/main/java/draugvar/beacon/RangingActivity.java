@@ -19,7 +19,7 @@ public class RangingActivity extends Activity implements BeaconConsumer {
     protected static final String TAG = "RangingActivity";
     private BeaconManager beaconManager;
     protected static FastItemAdapter fastAdapter;
-    public BeaconHandler beaconHandler;
+    public BeaconHandler beaconHandler = new BeaconHandler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
