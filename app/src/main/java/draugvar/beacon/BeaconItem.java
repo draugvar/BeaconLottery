@@ -6,8 +6,6 @@ import android.widget.TextView;
 
 import com.mikepenz.fastadapter.items.AbstractItem;
 
-import org.altbeacon.beacon.Beacon;
-
 public class BeaconItem extends AbstractItem<BeaconItem, BeaconItem.ViewHolder> {
     public String name;
     public String description;
