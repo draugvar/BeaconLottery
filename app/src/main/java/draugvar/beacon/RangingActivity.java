@@ -105,6 +105,7 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
                     BeaconItem beaconItem = new BeaconItem();
                     beaconItem.name = mMessage;
                     beaconItem.description = s[1];
+                    fastAdapter.clear();
                     fastAdapter.add(beaconItem);
             }
         }
