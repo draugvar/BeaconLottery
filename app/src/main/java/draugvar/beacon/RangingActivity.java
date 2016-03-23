@@ -100,9 +100,10 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
             Log.d(TAG, "Here comes the message!");
             switch (msg.what) {
                 case BeaconRangeNotifier.MESSAGE_READ:
-                    String[] s = msg.toString().split("||");
+                    String mMessage = (String) msg.obj;
+                    String[] s = mMessage.split("||");
                     BeaconItem beaconItem = new BeaconItem();
-                    beaconItem.name = s[0];
+                    beaconItem.name = mMessage;
                     beaconItem.description = s[1];
                     fastAdapter.add(beaconItem);
             }

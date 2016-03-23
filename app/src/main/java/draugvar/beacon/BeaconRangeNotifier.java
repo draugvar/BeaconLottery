@@ -20,7 +20,7 @@ public class BeaconRangeNotifier implements RangeNotifier{
     @Override
     public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
         if (beacons.size() > 0) {
-            BeaconItem beaconItem = null;
+            //BeaconItem beaconItem = null;
             for (Beacon beacon : beacons) {
                 String message = beacon.getId1() + "||" + beacon.getDistance();
                 mBeaconHandler.obtainMessage(MESSAGE_READ, message).sendToTarget();
