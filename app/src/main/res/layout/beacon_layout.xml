@@ -10,11 +10,11 @@
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/immagine"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="65dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
-        android:src="@drawable/b_icon"
+        android:src="@drawable/ibeacon"
         app:border_color="@color/blue_500"
         app:border_width="2dp"/>
 
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:orientation="vertical">
 
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="CIAO MAMMA"
+            android:text="CIAO MAMMA ahahahah"
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>
 </LinearLayout>

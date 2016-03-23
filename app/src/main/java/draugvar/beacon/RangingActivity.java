@@ -14,11 +14,13 @@ import android.view.MenuItem;
 
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 
+import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
 import org.altbeacon.beacon.BeaconManager;
 import org.altbeacon.beacon.BeaconParser;
 import org.altbeacon.beacon.Region;
 
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class RangingActivity extends AppCompatActivity implements BeaconConsumer {
@@ -45,10 +47,11 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
                         setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"));
         beaconManager.bind(this);
 
-        beaconManager.setBackgroundScanPeriod(6000l);
-        beaconManager.setForegroundScanPeriod(6000l);
+        beaconManager.setBackgroundScanPeriod(5000l); //fatti i fatti tuoi! :D
+        beaconManager.setForegroundScanPeriod(5000l);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.beacon_recycler_view);
+        assert recyclerView != null;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //create our FastAdapter which will manage everything
         fastAdapter = new FastItemAdapter();
@@ -104,17 +107,21 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            Log.d(TAG, "Here comes the message!");
+            //Log.d(TAG, "Here comes the message!");
             switch (msg.what) {
                 case BeaconRangeNotifier.MESSAGE_READ:
-                    String mMessage = (String) msg.obj;
-                    String[] s = mMessage.split(Pattern.quote("||"));
-                    BeaconItem beaconItem = new BeaconItem();
-                    beaconItem.name = s[0];
-                    beaconItem.distance = s[1];
-                    Log.d(TAG, "Name "+beaconItem.name+" distance "+beaconItem.distance);
                     fastAdapter.clear();
-                    fastAdapter.add(beaconItem);
+                    String[] beacons = (String[]) msg.obj;
+                    for(String beacon: beacons){
+                        String[] s = beacon.split(Pattern.quote("||"));
+                        BeaconItem beaconItem = new BeaconItem();
+                        beaconItem.name = s[0];
+                        beaconItem.distance = s[1];
+                        fastAdapter.add(beaconItem);
+                    }
+                    /*String mMessage = (String) msg.obj;
+                    Log.d(TAG, "Name "+beaconItem.name+" distance "+beaconItem.distance);*/
+
             }
         }
     }

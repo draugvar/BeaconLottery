@@ -31,9 +31,9 @@ public class BeaconItem extends AbstractItem<BeaconItem, BeaconItem.ViewHolder> 
 
         //bind our data
         //set the text for the name
-        viewHolder.name.setText(name);
+        viewHolder.name.setText(String.format("ID1: %s", name));
         //set the text for the distance or hide
-        viewHolder.distance.setText(distance);
+        viewHolder.distance.setText(String.format("Distance: %s", distance));
     }
 
     //The viewHolder used for this item. This viewHolder is always reused by the RecyclerView so scrolling is blazing fast
