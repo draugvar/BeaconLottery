@@ -38,8 +38,8 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
         //        setBeaconLayout("m:2-3=beac,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"));
         beaconManager.bind(this);
 
-        beaconManager.setBackgroundScanPeriod(800l);
-        beaconManager.setForegroundScanPeriod(800l);
+        beaconManager.setBackgroundScanPeriod(1000l);
+        beaconManager.setForegroundScanPeriod(1000l);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.beacon_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -92,9 +92,12 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
     }
 
     public static class BeaconHandler extends Handler{
+        protected static final String TAG = "BeaconHandler";
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            Log.d(TAG, "Here comes the message!");
             switch (msg.what) {
                 case BeaconRangeNotifier.MESSAGE_READ:
                     String[] s = msg.toString().split("||");

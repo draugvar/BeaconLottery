@@ -23,7 +23,7 @@ public class BeaconRangeNotifier implements RangeNotifier{
             BeaconItem beaconItem = null;
             for (Beacon beacon : beacons) {
                 String message = beacon.getId1() + "||" + beacon.getDistance();
-                mBeaconHandler.obtainMessage(MESSAGE_READ, message);
+                mBeaconHandler.obtainMessage(MESSAGE_READ, message).sendToTarget();
                 Log.i(TAG, "Beacon " + beacon.getId1().toString());
             }
         }
