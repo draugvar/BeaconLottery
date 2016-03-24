@@ -15,6 +15,7 @@ public class BeaconRangeNotifier implements RangeNotifier{
     private static RangingActivity.BeaconHandler mBeaconHandler;
     protected static final String TAG = "BeaconRangeNotifier";
     protected static final int MESSAGE_READ = 1;
+    protected static final int MESSAGE_CLEAN = 2;
     //private HashMap<Beacon, String> beaconsHM = new HashMap<>();
 
     public static void setBeaconHandler(RangingActivity.BeaconHandler beaconHandler){

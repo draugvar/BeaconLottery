@@ -31,6 +31,9 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
     protected static FastItemAdapter fastAdapter;
     public BeaconHandler beaconHandler = new BeaconHandler();
     private final static int REQUEST_ENABLE_BT = 1;
+    private static int FLAG = 0;
+    private static Handler runnableHandler = null;
+    private static Runnable runnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,20 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
 
         // setting handler
         BeaconRangeNotifier.setBeaconHandler(beaconHandler);
+
+        runnableHandler = new Handler();
+        runnable = new Runnable() {
+            public void run() {
+                Log.d(TAG,"runnable started!");
+                if (FLAG == 1) {
+                    FLAG = 0;
+                } else {
+                    fastAdapter.clear();
+                }
+                runnableHandler.postDelayed(this, 10000);
+            }
+        };
+        runnable.run();
     }
 
     @Override
@@ -97,8 +114,8 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
+        super.onStop();
         beaconManager.unbind(this);
         Intent mServiceIntent = new Intent(this, SimpleService.class);
         this.startService(mServiceIntent);
@@ -123,6 +140,7 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
             switch (msg.what) {
                 case BeaconRangeNotifier.MESSAGE_READ:
                     fastAdapter.clear();
+                    FLAG = 1;
                     String[] beacons = (String[]) msg.obj;
                     for(String beacon: beacons){
                         String[] s = beacon.split(Pattern.quote("||"));
@@ -133,7 +151,9 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
                     }
                     /*String mMessage = (String) msg.obj;
                     Log.d(TAG, "Name "+beaconItem.name+" distance "+beaconItem.distance);*/
-
+                    break;
+                default:
+                    break;
             }
         }
     }
