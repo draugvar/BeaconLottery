@@ -14,7 +14,7 @@
         android:layout_height="60dp"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
-        android:src="@drawable/ibeacon"
+        android:src="@drawable/new_beacon"
         app:border_color="@color/blue_500"
         app:border_width="2dp"/>
 
