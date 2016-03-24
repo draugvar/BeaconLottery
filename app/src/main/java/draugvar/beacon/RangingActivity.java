@@ -100,6 +100,8 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
     protected void onDestroy() {
         super.onDestroy();
         beaconManager.unbind(this);
+        Intent mServiceIntent = new Intent(this, SimpleService.class);
+        this.startService(mServiceIntent);
     }
 
     @Override
@@ -135,4 +137,5 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
             }
         }
     }
+
 }
