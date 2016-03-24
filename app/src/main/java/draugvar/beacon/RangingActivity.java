@@ -1,5 +1,7 @@
 package draugvar.beacon;
 
+import android.bluetooth.BluetoothAdapter;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -28,6 +30,7 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
     private BeaconManager beaconManager;
     protected static FastItemAdapter fastAdapter;
     public BeaconHandler beaconHandler = new BeaconHandler();
+    private final static int REQUEST_ENABLE_BT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,13 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
         Log.i(TAG, "RANGING ");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (!mBluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }
+
         beaconManager = BeaconManager.getInstanceForApplication(this);
         // To detect proprietary beacons, you must add a line like below corresponding to your beacon
         // type.  Do a web search for "setBeaconLayout" to get the proper expression.
