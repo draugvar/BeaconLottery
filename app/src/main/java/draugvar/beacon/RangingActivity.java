@@ -13,7 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.mikepenz.fastadapter.FastAdapter;
+import com.mikepenz.fastadapter.IAdapter;
+import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 
 import org.altbeacon.beacon.Beacon;
@@ -23,6 +27,7 @@ import org.altbeacon.beacon.BeaconParser;
 import org.altbeacon.beacon.Region;
 
 import java.util.HashMap;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 public class RangingActivity extends AppCompatActivity implements BeaconConsumer {
@@ -68,6 +73,20 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //create our FastAdapter which will manage everything
         fastAdapter = new FastItemAdapter();
+        fastAdapter.withOnClickListener(new FastAdapter.OnClickListener() {
+            @Override
+            public boolean onClick(View v, IAdapter adapter, IItem item, int position) {
+                Double bet = new Random().nextDouble();
+                if(bet >= 0.5){
+                    Intent i = new Intent(RangingActivity.this, WinActivity.class);
+                    startActivity(i);
+                } else {
+                    Intent i = new Intent(RangingActivity.this, LoseActivity.class);
+                    startActivity(i);
+                }
+                return false;
+            }
+        });
 
         //set our adapters to the RecyclerView
         //we wrap our FastAdapter inside the ItemAdapter -> This allows us to chain adapters for more complex useCases
@@ -85,7 +104,7 @@ public class RangingActivity extends AppCompatActivity implements BeaconConsumer
                 } else {
                     fastAdapter.clear();
                 }
-                runnableHandler.postDelayed(this, 10000);
+                runnableHandler.postDelayed(this, 50000);
             }
         };
         runnable.run();
